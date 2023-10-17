@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
-import { useVuelidate } from '@vuelidate/core'
+import { ref } from 'vue'
+import { useVuelidate, ErrorObject } from '@vuelidate/core'
 import { required, numeric, email, minLength } from '@vuelidate/validators'
-
-/* const state = reactive({
-  price: '',
-}) */
 
 const formData = ref({
   name: '',
@@ -24,7 +20,12 @@ const v$ = useVuelidate(rules, formData.value)
 const onSubmit = async () => {
   const validForm = await v$.value.$validate()
   if (!validForm) return
-  console.log(v$.value.price.$errors, formData.value)
+  console.log(v$.value)
+}
+
+const errorMessages = (error: ErrorObject[]) => {
+  const uid = error.map((e) => e.$message.toString())
+  return uid
 }
 </script>
 
@@ -36,25 +37,21 @@ const onSubmit = async () => {
         <v-form @submit.prevent="onSubmit">
           <v-text-field
             v-model="v$.name.$model"
-            :error-messages="v$.name.$errors.map((e) => e.$message.toString())"
+            :error-messages="errorMessages(v$.name.$errors)"
             variant="outlined"
             @blur="v$.name.$touch"
             @update:model-value="v$.name.$touch"
-            ><template #message="{ message }"
-              ><small>{{ message }}</small></template
-            >
-          </v-text-field>
+          />
           <v-text-field
             v-model.number="v$.price.$model"
-            :error-messages="v$.price.$errors.map((e) => e.$message.toString())"
-            type="number"
+            :error-messages="errorMessages(v$.price.$errors)"
             variant="outlined"
             @blur="v$.price.$touch"
             @update:model-value="v$.price.$touch"
           />
           <v-text-field
             v-model="v$.email.$model"
-            :error-messages="v$.email.$errors.map((e) => e.$message.toString())"
+            :error-messages="errorMessages(v$.email.$errors)"
             variant="outlined"
             @blur="v$.email.$touch"
             @update:model-value="v$.email.$touch"
