@@ -58,6 +58,7 @@ const errorMessages = (error: ErrorObject[]) => {
           />
           <v-btn
             color="success"
+            :disabled="v$.$error"
             type="submit"
             variant="outlined"
             >Enviar</v-btn
