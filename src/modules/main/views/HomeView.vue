@@ -53,6 +53,14 @@ const rules = ref({
             >
           </v-row>
         </v-form>
+        <v-row>
+          <v-col
+            ><RouterLink :to="{ name: 'VuelidateView' }"
+              >Vuelidate</RouterLink
+            ></v-col
+          >
+          <v-col></v-col>
+        </v-row>
       </v-card>
     </v-responsive>
   </v-container>

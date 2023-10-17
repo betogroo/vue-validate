@@ -12,6 +12,15 @@ const routes: CustomRouteRecordRaw[] = [
     },
   },
   {
+    path: '/vuelidate',
+    component: () => import('../views/VuelidateView.vue'),
+    name: 'VuelidateView',
+    meta: {
+      title: 'VuelidateView',
+      requiresAuth: false,
+    },
+  },
+  {
     path: '/about',
     component: () => import('../views/AboutView.vue'),
     name: 'AboutView',
