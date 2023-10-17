@@ -13,19 +13,21 @@ const validationSchema = toTypedSchema(
   }),
 )
 
-const { handleSubmit, handleReset } = useForm({ validationSchema })
+const { handleSubmit, handleReset, meta } = useForm({ validationSchema })
 
 const password = useField('password', validationSchema)
 
 const onSubmit = handleSubmit(async () => {
-  console.log(password.value.value)
+  console.log(meta.value.valid)
 })
 </script>
 
 <template>
   <v-container class="d-flex align-start justify-center fill-height">
     <v-responsive max-width="800">
-      {{ password.value }}
+      <v-sheet width="250">
+        <code> {{ password.value }} {{ meta }} </code>
+      </v-sheet>
       <v-card>
         <v-card-title>Vee Validate</v-card-title>
         <v-form @submit.prevent="onSubmit">
@@ -44,7 +46,11 @@ const onSubmit = handleSubmit(async () => {
             /></v-col>
             <v-col></v-col>
             <v-col cols="12">
-              <v-btn type="submit">Enviar</v-btn>
+              <v-btn
+                :disabled="!meta.valid"
+                type="submit"
+                >Enviar</v-btn
+              >
             </v-col>
           </v-row>
         </v-form>
