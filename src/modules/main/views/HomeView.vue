@@ -54,7 +54,11 @@ const rules = ref({
           </v-row>
         </v-form>
         <v-row>
-          <v-col></v-col>
+          <v-col
+            ><RouterLink :to="{ name: 'VuelidateView' }"
+              >Vuelidate</RouterLink
+            ></v-col
+          >
           <v-col
             ><RouterLink :to="{ name: 'VeeView' }"
               >Vee Validate</RouterLink
