@@ -18,8 +18,8 @@ const routes: CustomRouteRecordRaw[] = [
     meta: {
       title: 'Vee Validate',
       requiresAuth: false,
-    }
-},
+    },
+  },
   {
     path: '/vuelidate',
     component: () => import('../views/VuelidateView.vue'),
